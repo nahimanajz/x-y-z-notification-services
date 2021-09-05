@@ -16,7 +16,8 @@ class SubscriptionController extends Controller
      */
     public function index()
     {
-        //
+        $subscriptions=  Subscription::where('user_id',auth()->user()->id)->get();
+        return response($subscriptions, 200);
     }
 
     /**

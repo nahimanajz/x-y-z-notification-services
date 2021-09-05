@@ -42,6 +42,7 @@ Route::group(['middleware'=>
 ], function () {
 Route::post("/subscribe", 'SubscriptionController@store');
 Route::put("/change/subscription/{id}", 'SubscriptionController@update');
+Route::get('/subscriptions', 'SubscriptionController@index');
 
 });
 /*

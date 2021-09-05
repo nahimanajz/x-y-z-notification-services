@@ -10,18 +10,10 @@ paths:
   /signup:
     post:
       tags:
-      - Misc
+      - Authentication
       summary: Signup
       description: Signup
       operationId: Signup
-      parameters:
-      - name: Authorization
-        in: header
-        description: ''
-        style: simple
-        schema:
-          type: string
-          default: Bearer {token}
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -46,25 +38,10 @@ paths:
   /login:
     post:
       tags:
-      - Misc
+      - Authentication
       summary: Login
       description: Login
       operationId: Login
-      parameters:
-      - name: Authorization
-        in: header
-        description: ''
-        style: simple
-        schema:
-          type: string
-          default: Bearer {token}
-      - name: Accept
-        in: header
-        description: ''
-        required: true
-        style: simple
-        schema:
-          type: string
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -89,7 +66,7 @@ paths:
   /subscribe:
     post:
       tags:
-      - Misc
+      - Subscription
       summary: Subscribe
       description: Subscribe
       operationId: Subscribe
@@ -117,10 +94,10 @@ paths:
           headers: {}
           content: {}
       deprecated: false
-  /change/subscription/1:
+  /change/subscription/{id}:
     put:
       tags:
-      - Misc
+      - Subscription
       summary: Changesubscription
       description: Change subscription
       operationId: Changesubscription
@@ -132,13 +109,12 @@ paths:
         schema:
           type: string
           default: Bearer {token}
-      - name: Accept
-        in: header
-        description: ''
+      - name: id
+        in: path
+        description: 'Subscriber ID'
         required: true
-        style: simple
         schema:
-          type: string
+          type: integer
       requestBody:
         description: ''
         content:
@@ -206,5 +182,7 @@ components:
         sms: premium
         email: silver
 tags:
-- name: Misc
-  description: ''
+- name: Authentication
+  description: 'Authentication endpoints'
+- name: Subscription
+  description: 'Subscription endpoints'

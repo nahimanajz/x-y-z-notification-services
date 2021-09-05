@@ -11,7 +11,11 @@ class VerifyCsrfToken extends Middleware
      *
      * @var array
      */
-    protected $except = [
-        //
-    ];
+    protected $except = ['*']; //limit all routes to reject csrf token
+    //specifiy specific route  to reject csrf token
+   /* '/api/signup',
+        '/api/login',
+        '/api/subscribe',
+        '/api/change/subscription/{id}'
+    */
 }
