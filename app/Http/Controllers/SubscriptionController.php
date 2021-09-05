@@ -42,8 +42,8 @@ class SubscriptionController extends Controller
             "user_id"=> auth()->user()->id,
             "subscribedOn"=>json_encode(request("subscribedOn"))
         ];
-        Subscription::create($data);
-        return response("user subscribed", 201);
+        $sub = Subscription::create($data);
+        return response($sub, 201);
     }
 
     /**

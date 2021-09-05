@@ -62,7 +62,7 @@ class RouteServiceProvider extends ServiceProvider
         });
 
         RateLimiter::for('per_second', function (Request $request) {
-            if(Limit::perMinute(8)){               
+            if(Limit::perMinute(800)){               
                 return response("Too many attempts by this minute", 429);
             }
         });
@@ -76,12 +76,13 @@ class RouteServiceProvider extends ServiceProvider
         });
 
         RateLimiter::for('for_entire_system', function (Request $request) {
-            $systemLimit = Limit::perMinutes(4, 32)->by(optional($request->user())->id ?: $request->ip());
-            if($systemLimit){
-                 return response("Whole system encountered too many request", 429);
-            }
+            return Limit::perMinutes(4, 4);
             
         });
+        if (RateLimiter::tooManyAttempts('test', $perMinute = 5)) {
+            return 'Too many attempts!';
+        }
+        
        
     }
 }
