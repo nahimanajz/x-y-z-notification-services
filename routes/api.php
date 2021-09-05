@@ -24,37 +24,21 @@ Route::get('/users', function () {
 });
 
 /** with rate limiting */
-/*
-Route::group(['middleware'=>
+
+Route::group(['middleware' =>
    'throttle:for_entire_system'
 ], function () {
  Route::post('/signup', 'AuthController@signup');
  Route::post('/login', 'AuthController@login');
 });
-*/
-
-
- Route::post('/signup', 'AuthController@signup');
- Route::post('/login', 'AuthController@login');
-
- Route::group(['middleware' => [
-    'auth:sanctum'
-    ]
-], function () {
-// Route::post("/subscribe", 'SubscriptionController@store');
-// Route::put("/change/subscription/{id}", 'SubscriptionController@update');
-// Route::get('/subscriptions', 'SubscriptionController@index');
-
-});
-
 
 //private endpoint with throttling
 
 Route::group(['middleware' => [
         'auth:sanctum',
-        // "throttle:per_month",
+         "throttle:per_month",
         'throttle:for_entire_system',
-        // 'throttle:per_second'
+        'throttle:per_second'
         ]
 ], function () {
     Route::post("/subscribe", 'SubscriptionController@store');

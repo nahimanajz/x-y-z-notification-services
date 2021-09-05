@@ -62,27 +62,15 @@ class RouteServiceProvider extends ServiceProvider
         });
 
         RateLimiter::for('per_second', function (Request $request) {
-            if(Limit::perMinute(800)){               
-                return response("Too many attempts by this minute", 429);
-            }
+           return Limit::perMinute(4);
         });
 
         RateLimiter::for('per_month', function (Request $request) {
-           $monthlyLimit= Limit::perDay(150)->by(optional($request->user())->id ?: $request->ip());
-           if($monthlyLimit){
-               return response("Hi ".auth()->user()->name." you reached  requests limit this month",429);
-           } 
-           
+            return Limit::perDay(91);
         });
 
         RateLimiter::for('for_entire_system', function (Request $request) {
-            return Limit::perMinutes(4, 4);
-            
+             return Limit::perMinutes(4, 30);
         });
-        if (RateLimiter::tooManyAttempts('test', $perMinute = 5)) {
-            return 'Too many attempts!';
-        }
-        
-       
     }
 }
