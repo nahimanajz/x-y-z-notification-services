@@ -1,0 +1,210 @@
+openapi: 3.0.0
+info:
+  title: iremboNotifcationServices
+  contact: {}
+  version: '1.0'
+servers:
+- url: http://127.0.0.1:8000/api
+  variables: {}
+paths:
+  /signup:
+    post:
+      tags:
+      - Misc
+      summary: Signup
+      description: Signup
+      operationId: Signup
+      parameters:
+      - name: Authorization
+        in: header
+        description: ''
+        style: simple
+        schema:
+          type: string
+          default: Bearer {token}
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            encoding: {}
+            schema:
+              required:
+              - name
+              - passwords
+              type: object
+              properties:
+                name:
+                  type: string
+                passwords:
+                  type: string
+        required: false
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content: {}
+      deprecated: false
+  /login:
+    post:
+      tags:
+      - Misc
+      summary: Login
+      description: Login
+      operationId: Login
+      parameters:
+      - name: Authorization
+        in: header
+        description: ''
+        style: simple
+        schema:
+          type: string
+          default: Bearer {token}
+      - name: Accept
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            encoding: {}
+            schema:
+              required:
+              - name
+              - password
+              type: object
+              properties:
+                name:
+                  type: string
+                password:
+                  type: string
+        required: false
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content: {}
+      deprecated: false
+  /subscribe:
+    post:
+      tags:
+      - Misc
+      summary: Subscribe
+      description: Subscribe
+      operationId: Subscribe
+      parameters:
+      - name: Authorization
+        in: header
+        description: ''
+        style: simple
+        schema:
+          type: string
+          default: Bearer {token}
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubscribeRequest'
+            example:
+              subscribeOn:
+                sms: silver
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content: {}
+      deprecated: false
+  /change/subscription/1:
+    put:
+      tags:
+      - Misc
+      summary: Changesubscription
+      description: Change subscription
+      operationId: Changesubscription
+      parameters:
+      - name: Authorization
+        in: header
+        description: ''
+        style: simple
+        schema:
+          type: string
+          default: Bearer {token}
+      - name: Accept
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangesubscriptionRequest'
+            example:
+              subscribedOn:
+                sms: premium
+                email: silver
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content: {}
+      deprecated: false
+components:
+  schemas:
+    SubscribeRequest:
+      title: SubscribeRequest
+      required:
+      - subscribeOn
+      type: object
+      properties:
+        subscribeOn:
+          $ref: '#/components/schemas/SubscribeOn'
+      example:
+        subscribeOn:
+          sms: silver
+    SubscribeOn:
+      title: SubscribeOn
+      required:
+      - sms
+      type: object
+      properties:
+        sms:
+          type: string
+      example:
+        sms: silver
+    ChangesubscriptionRequest:
+      title: ChangesubscriptionRequest
+      required:
+      - subscribedOn
+      type: object
+      properties:
+        subscribedOn:
+          $ref: '#/components/schemas/SubscribedOn'
+      example:
+        subscribedOn:
+          sms: premium
+          email: silver
+    SubscribedOn:
+      title: SubscribedOn
+      required:
+      - sms
+      - email
+      type: object
+      properties:
+        sms:
+          type: string
+        email:
+          type: string
+      example:
+        sms: premium
+        email: silver
+tags:
+- name: Misc
+  description: ''
