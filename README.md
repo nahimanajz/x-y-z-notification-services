@@ -5,13 +5,17 @@
 git clone https://github.com/nahimanajz/x-y-z-notification-services 
 cd x-y-z-notification-services
 composer update
+cp .env.example .env
+specify database
 php artisan migrate
 php artisan serve
+
 ``` 
 Then use postman to fetch the following enpoints 👇🏾 to test functionalisty 
 get postman from [here](https://www.postman.com/)
-### APIs 
+Use `127.0.0.1:8000` to view swagger documentation
 
+### List of endpoints  
 |Method| endpoint |
 |------|---------|
 |POST|api/signup|
@@ -19,3 +23,7 @@ get postman from [here](https://www.postman.com/)
 |POST|api/subscribe|
 |PUT|/api/change/subscription/{subscription_id}|
 
+### Tools used
+- PHP: Laravel Framework
+- Mysql Database but it okay you can user Postgress 
+- Rate limit and throlling are enabled per user and whole system as well
