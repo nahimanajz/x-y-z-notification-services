@@ -21,16 +21,31 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/users', function () {
     return response(User::all());
-})->middleware("throttle:for_entire_system");
+});//->middleware("throttle:for_entire_system");
 
+/** with rate limiting */
+/*
 Route::group(['middleware'=>
    'throttle:for_entire_system'
 ], function () {
  Route::post('/signup', 'AuthController@signup');
  Route::post('/login', 'AuthController@login');
 });
+*/
 
 
+ Route::post('/signup', 'AuthController@signup');
+ Route::post('/login', 'AuthController@login');
+ Route::group(['middleware' => [
+    'auth:sanctum'
+    ]
+], function () {
+Route::post("/subscribe", 'SubscriptionController@store');
+Route::put("/change/subscription/{id}", 'SubscriptionController@update');
+
+});
+/*
+private endpoint with throttling
 Route::group(['middleware' => [
         'auth:sanctum',
         "throttle:per_month",
@@ -42,3 +57,4 @@ Route::group(['middleware' => [
     Route::put("/change/subscription/{id}", 'SubscriptionController@update');
  
 });
+*/
