@@ -16,7 +16,8 @@ get postman from [here](https://www.postman.com/)
 Use `127.0.0.1:8000` to view swagger documentation
 ### Test
  - php artisan test
- 
+ ### Powerpoint docs
+  Click  [here](https://docs.google.com/presentation/d/1pD_4xo780z1cbpACe3s4W89yY-MUdBjExfYo7CBAjsY/edit?usp=sharing) for slides
 ### List of endpoints  
 |Method| endpoint |
 |------|---------|
