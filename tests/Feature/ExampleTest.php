@@ -2,9 +2,10 @@
 
 namespace Tests\Feature;
 
+use Facade\FlareClient\Http\Response;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 
+use Tests\TestCase;
 class ExampleTest extends TestCase
 {
     /**
@@ -18,4 +19,5 @@ class ExampleTest extends TestCase
 
         $response->assertStatus(200);
     }
+   
 }

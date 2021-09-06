@@ -21,12 +21,12 @@ paths:
             schema:
               required:
               - name
-              - passwords
+              - password
               type: object
               properties:
                 name:
                   type: string
-                passwords:
+                password:
                   type: string
         required: false
       responses:

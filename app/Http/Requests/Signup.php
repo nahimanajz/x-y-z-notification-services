@@ -25,13 +25,13 @@ class Signup extends FormRequest
     {
         return [
             "name" => "required",
-            "passwords"=> "required"
+            "password"=> "required"
         ];
     }
     public function messages(){
         return [
             "name.required"=> "name is mandatory",
-            "passwords.required"=>"password are mandatory"
+            "password.required"=>"password are mandatory"
         ];
     }
 }
