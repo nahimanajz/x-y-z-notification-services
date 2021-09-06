@@ -71,7 +71,7 @@ class RouteServiceProvider extends ServiceProvider
         });
 
         RateLimiter::for('per_month', function (Request $request) {
-            return Limit::perDay(11)->by($request->id)->response(function(){
+            return Limit::perDay(100)->by($request->id)->response(function(){
                 return response()->json([
                   'response' => 'failed',
                   'message' => 'Too many request this month',
@@ -80,7 +80,7 @@ class RouteServiceProvider extends ServiceProvider
         });
 
         RateLimiter::for('for_entire_system', function (Request $request) {
-             return Limit::perMinutes(4, 20)->by($request->id)->response(function(){
+             return Limit::perMinutes(4, 20)->by("")->response(function(){
                 return response()->json([
                   'response' => 'failed',
                   'message' => 'Whole system encountered many requests',
