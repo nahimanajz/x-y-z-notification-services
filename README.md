@@ -14,7 +14,9 @@ php artisan serve
 Then use postman to fetch the following enpoints 👇🏾 to test functionalisty 
 get postman from [here](https://www.postman.com/)
 Use `127.0.0.1:8000` to view swagger documentation
-
+### Test
+ - php artisan test
+ 
 ### List of endpoints  
 |Method| endpoint |
 |------|---------|
