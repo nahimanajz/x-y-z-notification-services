@@ -62,15 +62,30 @@ class RouteServiceProvider extends ServiceProvider
         });
 
         RateLimiter::for('per_second', function (Request $request) {
-           return Limit::perMinute(4);
+           return Limit::perMinute(4)->by($request->id)->response(function(){
+               return response()->json([
+                 'response' => 'failed',
+                 'message' => 'Too many request has been made',
+               ], 429);
+           });
         });
 
         RateLimiter::for('per_month', function (Request $request) {
-            return Limit::perDay(91);
+            return Limit::perDay(11)->by($request->id)->response(function(){
+                return response()->json([
+                  'response' => 'failed',
+                  'message' => 'Too many request this month',
+                ], 429);
+            });;
         });
 
         RateLimiter::for('for_entire_system', function (Request $request) {
-             return Limit::perMinutes(4, 30);
+             return Limit::perMinutes(4, 20)->by($request->id)->response(function(){
+                return response()->json([
+                  'response' => 'failed',
+                  'message' => 'Whole system encountered many requests',
+                ], 429);
+            });;
         });
     }
 }
